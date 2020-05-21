@@ -1,0 +1,55 @@
+version: '3.3'
+
+services:
+  express:
+    build:
+      context: ./services/express
+    image: microservice_express
+    container_name: microservice_express
+    command: node index.js
+
+  falcon:
+    build:
+      context: ./services/falcon
+    image: microservice_falcon
+    container_name: microservice_falcon
+    command: gunicorn autoapp:app -b 0.0.0.0:8080 --access-logfile -
+
+  fastify:
+    build:
+      context: ./services/fastify
+    image: microservice_fastify
+    container_name: microservice_fastify
+    command: node index.js
+
+  flask:
+    build:
+      context: ./services/flask
+    image: microservice_flask
+    container_name: microservice_flask
+    command: gunicorn autoapp:app -b 0.0.0.0:8080 --access-logfile -
+
+  gin:
+    build:
+      context: ./services/gin
+    image: microservice_gin
+    container_name: microservice_gin
+    command: ./microservice_gin
+
+  gorilla:
+    build:
+      context: ./services/gorilla
+    image: microservice_gorilla
+    container_name: microservice_gorilla
+    command: ./microservice_gorilla
+
+  gateway:
+    container_name: microservice_gateway
+    image: nginx:1.17
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - flask
+    command: /bin/bash -c "nginx -g 'daemon off;'"
