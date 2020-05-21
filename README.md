@@ -2,7 +2,7 @@
 This repo demonstrates core dependency management by extending base images. There are three
 languages represented, each serving two microservices using different frameworks for a total of six
 microservices. The six microservices are connected via nginx gateway and are accessible at
-http://0.0.0.0:8080/<framework>/
+http://0.0.0.0:8080/<framework\>/
 
 Each language has a base image with common dependencies. Each microservice extends the language's
 base image to install its own dependencies.
