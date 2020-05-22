@@ -46,3 +46,17 @@ The Go base image install `golint` as a common dependency.
 
 The two services exposed by Go run Gin and Gorilla as their API frameworks. The `docker build`
 process for each runs `golint`.
+
+
+## Takeaways
+### Dependency Resolution
+To test dependency resolution, we installed conflicting versions of two dependencies on the flask
+microservice. Dependencies installed in the service are given precedence.
+
+We install python-dateutil 2.8.0 in the base image, and 2.8.1 in the flask service. When we inspect
+the installed version, we see 2.8.1 in use.
+
+We install python-dateutil 2020.1 in the base image, and 2019.3 in the flask service. When we inspect
+the installed version, we see 2019.3 in use.
+
+You can test this yourself by running `docker-compose run --rm flask bash -c 'python deps.py'`.

@@ -1,2 +1,2 @@
 FROM python:3.6
-RUN pip install gevent greenlet gunicorn
+RUN pip install gevent greenlet gunicorn python-dateutil==2.8.0 pytz==2020.1
